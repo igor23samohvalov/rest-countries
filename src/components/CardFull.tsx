@@ -1,20 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
-interface CardFullProps {
-  capital: string;
-  currencies: any;
-  img: string;
-  languages: string[];
-  name: string;
-  nativeName: any;
-  population: number;
-  subregion: string;
-  region: string;
-  tld: string;
-  borders: string[];
-};
+import { ICardFull } from '../types/types';
 
 const StyledImg = styled.img`
   display: block;
@@ -81,7 +68,7 @@ const StyledB = styled.span`
   font-weight: var(--fw-normal);
 `;
 
-const CardFull:React.FC<CardFullProps> = (card) => {
+const CardFull:React.FC<ICardFull> = (card) => {
 
   return (
     <>
@@ -105,13 +92,12 @@ const CardFull:React.FC<CardFullProps> = (card) => {
         <CardAction>
           <StyledB style={{ marginRight: '10px' }}>Border Countries: </StyledB>
           {
-            card.borders.length === 0
+            card?.borders?.length === 0
               ? 'There are no border countries around'
-              : card.borders.map((b) => (
+              : card?.borders?.map((b) => (
                 <Link to={`/${b}`} key={b}>
                   <StyledButton >{b}</StyledButton>
                 </Link>
-
               ))
           }
         </CardAction>

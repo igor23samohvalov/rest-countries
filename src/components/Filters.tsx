@@ -54,17 +54,21 @@ const StyledIcon = styled(FaSearch)`
   left: 25px;
 `;
 
-interface FiltersInterface {
+interface FiltersProps {
   filterCards: (country: string, region: string) => void;
 };
 
-const Filters:React.FC<FiltersInterface> = ({ filterCards }) => {
+const Filters:React.FC<FiltersProps> = ({ filterCards }) => {
   const [country, setCountry] = useState<string>('');
   const [region, setRegion] = useState<string>('');
 
+  const handleInput:React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setCountry(e.target.value)
+  };
+
   useEffect(() => {
     filterCards(country, region)
-  }, [country, region])
+  }, [country, region]);
 
   return (
     <Wrapper>
@@ -74,7 +78,7 @@ const Filters:React.FC<FiltersInterface> = ({ filterCards }) => {
           type="text"
           name="countryName"
           placeholder="Search for a country..."
-          onChange={(e) => setCountry(e.target.value)}
+          onChange={handleInput}
         />
       </InputContainer>
       <CustomSelect

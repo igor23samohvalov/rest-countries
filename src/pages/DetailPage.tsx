@@ -6,19 +6,7 @@ import { Container } from '../components/Container';
 import { routeCodes, routeSingle } from '../routing';
 import CardFull from '../components/CardFull';
 import NavigateBack from '../components/NavigateBack';
-
-type CardTypes = {
-  capital: string;
-  currencies: any;
-  img: string;
-  languages: string[];
-  name: string;
-  nativeName: any;
-  population: number;
-  subregion: string;
-  tld: string; 
-  region: string;
-}
+import { ICardFull, ISingleCardFetch } from '../types/types';
 
 const defaultCard = {
   capital: '',
@@ -31,7 +19,7 @@ const defaultCard = {
   subregion: '',
   tld: '',
   region: '',
-}
+};
 
 const Wrapper = styled.div`
   display: grid;
@@ -45,13 +33,14 @@ const Wrapper = styled.div`
 `;
 
 const DetailPage:React.FC = () => {
-  const { name } = useParams();
+  const { name } = useParams<string>();
   const navigate = useNavigate();
-  const [card, setCard] = useState<CardTypes>(defaultCard);
+
+  const [card, setCard] = useState<ICardFull>(defaultCard);
   const [borders, setBorders] = useState<string[]>([]);
 
   useEffect(() => {
-    axios.get(routeSingle(name))
+    axios.get<ISingleCardFetch[]>(routeSingle(name))
       .then((res) => {
         if (res.status === 404) {
           throw new Error('Not Found');

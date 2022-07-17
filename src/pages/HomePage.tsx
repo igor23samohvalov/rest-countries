@@ -6,6 +6,7 @@ import CardPreview from '../components/CardPreview';
 import { Container } from '../components/Container';
 import Filters from '../components/Filters';
 import { routeAll } from '../routing';
+import { ICardPreview } from '../types/types';
 
 const CardsContainer = styled.div`
   display: grid;
@@ -20,8 +21,8 @@ const CardsContainer = styled.div`
 `;
 
 const HomePage:React.FC = () => {
-  const [allCards, setAllCards] = useState<any[]>([]);
-  const [cards, setCards] = useState<any[]>([]);
+  const [allCards, setAllCards] = useState<ICardPreview[]>([]);
+  const [cards, setCards] = useState<ICardPreview[]>([]);
   const navigate = useNavigate();
   
   const filterCards = (country: string, region: string):void => {
@@ -33,7 +34,7 @@ const HomePage:React.FC = () => {
   }
 
   useEffect(() => {
-    axios.get(routeAll())
+    axios.get<ICardPreview[]>(routeAll())
       .then((res) => res.data)
       .then((data) => {
         setCards(data)

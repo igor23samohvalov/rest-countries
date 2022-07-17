@@ -17,7 +17,6 @@ const CardContainer = styled.div`
     cursor: pointer;
   }
 `;
-
 const CardImage = styled.img`
   display: block;
   width: 100%;
@@ -30,7 +29,7 @@ const CardImage = styled.img`
 const CardWrapper = styled.div`
   padding: 20px;
 
-`
+`;
 const CardTitle = styled.h3`
   margin-top: 10px;
   maring-bottom: 10px;
@@ -45,7 +44,7 @@ const CardInfo = styled.div`
 
   & > * {
     padding-bottom: 5px;
-  }
+  };
 `;
 
 interface CardPreviewProps {
