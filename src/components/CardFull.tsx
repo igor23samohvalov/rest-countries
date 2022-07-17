@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface CardFullProps {
@@ -13,7 +14,7 @@ interface CardFullProps {
   region: string;
   tld: string;
   borders: string[];
-}
+};
 
 const StyledImg = styled.img`
   display: block;
@@ -21,6 +22,10 @@ const StyledImg = styled.img`
   object-fit: cover;
   object-position: center;
   box-shadow: var(--shadow);
+
+  @media (max-width: 768px) {
+    width: fit-content;
+  }
 `;
 const Card = styled.div`
   display: flex;
@@ -34,12 +39,32 @@ const CardContent = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   font-size: var(--fs-sm);
+
+  & > div > * {
+    padding-bottom: 10px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+
+    & > div {
+      margin-bottom: 25px;
+    }
+  } 
 `;
 const CardAction = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-`
+
+  @media (max-width: 768px) {
+    span {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+`;
 const StyledButton = styled.button`
   padding: 8px 25px;
   margin-right: 10px;
@@ -53,10 +78,11 @@ const StyledButton = styled.button`
   box-shadow: var(--shadow);
 `;
 const StyledB = styled.span`
-  font-weight: var(--fw-bold);
-`
+  font-weight: var(--fw-normal);
+`;
 
 const CardFull:React.FC<CardFullProps> = (card) => {
+
   return (
     <>
       <StyledImg src={card.img} />
@@ -73,7 +99,7 @@ const CardFull:React.FC<CardFullProps> = (card) => {
           <div>
             <div><StyledB>Top Level Domain: </StyledB><span>{card.tld}</span></div>
             <div><StyledB>Currencies: </StyledB><span>{card.currencies.name}</span></div>
-            <div><StyledB>Languages: </StyledB><span>{card.languages.map((l) => `${l}, `)}</span></div>
+            <div><StyledB>Languages: </StyledB><span>{card.languages.join(', ')}</span></div>
           </div>
         </CardContent>
         <CardAction>
@@ -81,7 +107,12 @@ const CardFull:React.FC<CardFullProps> = (card) => {
           {
             card.borders.length === 0
               ? 'There are no border countries around'
-              : card.borders.map((b) => <StyledButton key={b}>{b}</StyledButton>)
+              : card.borders.map((b) => (
+                <Link to={`/${b}`} key={b}>
+                  <StyledButton >{b}</StyledButton>
+                </Link>
+
+              ))
           }
         </CardAction>
       </Card>

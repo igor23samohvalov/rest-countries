@@ -11,6 +11,11 @@ const CardContainer = styled.div`
   border-radius: 5px;
   cursor: pointer;
   box-shadow: var(--shadow);
+
+  &:hover {
+    box-shadow: var(--intense-shadow);
+    cursor: pointer;
+  }
 `;
 
 const CardImage = styled.img`
@@ -37,6 +42,10 @@ const CardInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   font-size: var(--fs-sm);
+
+  & > * {
+    padding-bottom: 5px;
+  }
 `;
 
 interface CardPreviewProps {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Container } from '../components/Container';
-import { route } from '../routing';
+import { routeCodes, routeSingle } from '../routing';
 import CardFull from '../components/CardFull';
 import NavigateBack from '../components/NavigateBack';
 
@@ -18,7 +18,6 @@ type CardTypes = {
   subregion: string;
   tld: string; 
   region: string;
-  borders: string[];
 }
 
 const defaultCard = {
@@ -32,22 +31,33 @@ const defaultCard = {
   subregion: '',
   tld: '',
   region: '',
-  borders: [],
 }
 
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 100px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const DetailPage:React.FC = () => {
   const { name } = useParams();
+  const navigate = useNavigate();
   const [card, setCard] = useState<CardTypes>(defaultCard);
+  const [borders, setBorders] = useState<string[]>([]);
 
   useEffect(() => {
-    axios.get(route(name))
-      .then((res) => res.data)
+    axios.get(routeSingle(name))
+      .then((res) => {
+        if (res.status === 404) {
+          throw new Error('Not Found');
+        } 
+        return res.data;
+      })
       .then(([data]) => {
         setCard({
           capital: data.capital[0],
@@ -55,14 +65,21 @@ const DetailPage:React.FC = () => {
           img: data.flags.png,
           languages: Object.values(data.languages),
           nativeName: Object.values(data.name.nativeName)[0],
-          name: data.name.official,
+          name: data.name.common,
           population: data.population,
           subregion: data.subregion,
           tld: data.tld[0],
           region: data.region,
-          borders: data.borders,
-        })});
-  }, []);
+        });
+        if (data.borders.length > 0) {
+          axios.get(routeCodes(data.borders))
+            .then((res) => res.data)
+            .then((data) => data.map(({ name }:any) => name.common))
+            .then((borders) => setBorders(borders))
+        }
+      })
+      .catch(() => navigate('/404'));
+  }, [name]);
 
   return (
     <main>
@@ -80,7 +97,7 @@ const DetailPage:React.FC = () => {
             subregion={card.subregion}
             tld={card.tld}
             region={card.region}
-            borders={card.borders}
+            borders={borders}
           />
         </Wrapper>
       </Container>

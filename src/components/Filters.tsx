@@ -20,12 +20,18 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   padding-top: 40px;
   padding-bottom: 40px;
 `;
 const InputContainer = styled.div`
   position: relative;
   width: 35%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-bottom: 25px;
+  };
 `;
 const StyledInput = styled.input`
   border: none;

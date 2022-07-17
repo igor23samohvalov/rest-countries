@@ -36,4 +36,8 @@ export const CustomSelect = styled(Select).attrs({
     font-size: var(--fs-sm);
     font-weight: var(--fw-normal);
   };
+
+  @media (max-width: 768px) {
+    width: 70%;
+  }
 `;

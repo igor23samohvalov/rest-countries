@@ -1,21 +1,28 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import CardPreview from '../components/CardPreview';
 import { Container } from '../components/Container';
 import Filters from '../components/Filters';
-import { route } from '../routing';
+import { routeAll } from '../routing';
 
 const CardsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: auto;
   grid-gap: 50px;
-`
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+`;
 
 const HomePage:React.FC = () => {
   const [allCards, setAllCards] = useState<any[]>([]);
   const [cards, setCards] = useState<any[]>([]);
+  const navigate = useNavigate();
   
   const filterCards = (country: string, region: string):void => {
     const filteredCards = allCards.filter((c) => {
@@ -26,12 +33,13 @@ const HomePage:React.FC = () => {
   }
 
   useEffect(() => {
-    axios.get(route())
+    axios.get(routeAll())
       .then((res) => res.data)
       .then((data) => {
         setCards(data)
         setAllCards(data)
       })
+      .catch(() => navigate('/404'));
   }, []);
 
   return (
@@ -41,10 +49,10 @@ const HomePage:React.FC = () => {
         <CardsContainer>
           {cards.map((c) => (
             <CardPreview
-              key={c.name.official}
+              key={c.name.common}
               capital={c.capital[0]}
               flag={c.flags.png}
-              name={c.name.official}
+              name={c.name.common}
               population={c.population}
               region={c.region}
             />
