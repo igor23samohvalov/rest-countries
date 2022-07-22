@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { ICardFull } from '../types/types';
+import Loader from './Loader';
 
-const StyledImg = styled.img`
+const StyledImg = styled(motion.img)`
   display: block;
   width: 100%;
   object-fit: cover;
@@ -14,7 +16,7 @@ const StyledImg = styled.img`
     width: fit-content;
   }
 `;
-const Card = styled.div`
+const Card = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -69,11 +71,21 @@ const StyledB = styled.span`
 `;
 
 const CardFull:React.FC<ICardFull> = (card) => {
-
+  if (card.loading) return <Loader />
+  
   return (
     <>
-      <StyledImg src={card.img} />
-      <Card>
+      <StyledImg
+        src={card.img}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4 }}
+      />
+      <Card
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4 }}
+      >
         <CardTitle>{card.name}</CardTitle>
         <CardContent>
           <div>

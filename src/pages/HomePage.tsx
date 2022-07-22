@@ -7,6 +7,7 @@ import { Container } from '../components/Container';
 import Filters from '../components/Filters';
 import { routeAll } from '../routing';
 import { ICardPreview } from '../types/types';
+import Loader from '../components/Loader';
 
 const CardsContainer = styled.div`
   display: grid;
@@ -23,6 +24,8 @@ const CardsContainer = styled.div`
 const HomePage:React.FC = () => {
   const [allCards, setAllCards] = useState<ICardPreview[]>([]);
   const [cards, setCards] = useState<ICardPreview[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const navigate = useNavigate();
   
   const filterCards = (country: string, region: string):void => {
@@ -34,11 +37,13 @@ const HomePage:React.FC = () => {
   }
 
   useEffect(() => {
+    setLoading(true);
     axios.get<ICardPreview[]>(routeAll())
       .then((res) => res.data)
       .then((data) => {
         setCards(data)
         setAllCards(data)
+        setLoading(false);
       })
       .catch(() => navigate('/404'));
   }, []);
@@ -47,18 +52,22 @@ const HomePage:React.FC = () => {
     <main>
       <Container>
         <Filters filterCards={filterCards} />
-        <CardsContainer>
-          {cards.map((c) => (
-            <CardPreview
-              key={c.name.common}
-              capital={c.capital[0]}
-              flag={c.flags.png}
-              name={c.name.common}
-              population={c.population}
-              region={c.region}
-            />
-          ))}
-        </CardsContainer>
+        
+          {loading 
+              ? <Loader />
+              : <CardsContainer>
+                  {cards.map((c) => (
+                    <CardPreview
+                      key={c.name.common}
+                      capital={c.capital[0]}
+                      flag={c.flags.png}
+                      name={c.name.common}
+                      population={c.population}
+                      region={c.region}
+                    />
+                  ))}
+                </CardsContainer>
+          }
       </Container>
     </main>
   );

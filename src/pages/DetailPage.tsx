@@ -36,10 +36,12 @@ const DetailPage:React.FC = () => {
   const { name } = useParams<string>();
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [card, setCard] = useState<ICardFull>(defaultCard);
   const [borders, setBorders] = useState<string[]>([]);
 
   useEffect(() => {
+    setLoading(true);
     axios.get<ISingleCardFetch[]>(routeSingle(name))
       .then((res) => {
         if (res.status === 404) {
@@ -66,6 +68,7 @@ const DetailPage:React.FC = () => {
             .then((data) => data.map(({ name }:any) => name.common))
             .then((borders) => setBorders(borders))
         }
+        setLoading(false);
       })
       .catch(() => navigate('/404'));
   }, [name]);
@@ -87,6 +90,7 @@ const DetailPage:React.FC = () => {
             tld={card.tld}
             region={card.region}
             borders={borders}
+            loading={loading}
           />
         </Wrapper>
       </Container>

@@ -18,6 +18,7 @@ export interface ICardFull {
   tld: string; 
   region: string;
   borders?: string[];
+  loading?: boolean;
 };
 
 export interface ISingleCardFetch {

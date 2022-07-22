@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { motion } from "framer-motion";
 
-const CardContainer = styled.div`
+const CardContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -59,7 +60,16 @@ const CardPreview:React.FC<CardPreviewProps> = ({ capital, flag, name, populatio
   const navigate = useNavigate();
 
   return (
-    <CardContainer onClick={() => navigate(name)}>
+    <CardContainer
+      onClick={() => navigate(name)}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.2 }}
+      whileHover={{
+        scale: 1.009,
+        transition: { duration: 0.3 },
+      }}
+    >
       <CardImage src={flag} />
       <CardWrapper>
         <CardTitle>{name}</CardTitle>
