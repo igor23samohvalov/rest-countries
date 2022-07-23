@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { BsFillMoonFill } from 'react-icons/bs';
 import { Container } from './Container';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -35,16 +36,7 @@ const Title = styled.a.attrs({
 `;
 
 const Header:React.FC = () => {
-  const [theme, setTheme] = useState('light');
-
-  const handleThemeSwitch = ():void => {
-    const newTheme:string = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-  }
-
-  useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
-  }, [theme])
+  const [theme, toggleTheme] = useLocalStorage('light', 'theme');
 
   return (
     <HeaderEl>
@@ -53,7 +45,7 @@ const Header:React.FC = () => {
           <Title>
             Where in the world?
           </Title>
-          <ThemeSwitcher onClick={handleThemeSwitch}>
+          <ThemeSwitcher onClick={toggleTheme}>
               <BsFillMoonFill /> {theme === 'light' ? 'Dark' : 'Light'} Mode
           </ThemeSwitcher>
         </Wrapper>
