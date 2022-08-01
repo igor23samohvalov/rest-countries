@@ -1,74 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
 import { ICardFull } from '../types/types';
-import Loader from './Loader';
+import Loader from './styles/Loader';
+import {
+  StyledImg,
+  Card,
+  CardTitle,
+  CardContent,
+  CardAction,
+  StyledButton,
+  StyledB,
+} from './styles/CardFull.styles';
 
-const StyledImg = styled(motion.img)`
-  display: block;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-  box-shadow: var(--shadow);
-
-  @media (max-width: 768px) {
-    width: fit-content;
-  }
-`;
-const Card = styled(motion.div)`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-`;
-const CardTitle = styled.h2`
-  display: block;
-`;
-const CardContent = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  font-size: var(--fs-sm);
-
-  & > div > * {
-    padding-bottom: 10px;
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-
-    & > div {
-      margin-bottom: 25px;
-    }
-  } 
-`;
-const CardAction = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  @media (max-width: 768px) {
-    span {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-  }
-`;
-const StyledButton = styled.button`
-  padding: 8px 25px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: var(--elems-color);
-  font-size: var(--fs-sm);
-  color: var(--font-color);
-  box-shadow: var(--shadow);
-`;
-const StyledB = styled.span`
-  font-weight: var(--fw-normal);
-`;
 
 const CardFull:React.FC<ICardFull> = (card) => {
   if (card.loading) return <Loader />

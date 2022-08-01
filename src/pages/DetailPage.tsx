@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Container } from '../components/Container';
+import { Container } from '../components/styles/Container';
 import { routeCodes, routeSingle } from '../routing';
 import CardFull from '../components/CardFull';
 import NavigateBack from '../components/NavigateBack';

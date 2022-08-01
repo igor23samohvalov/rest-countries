@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from "framer-motion";
 
 const LoaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 55vh;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, 0);
 `;
 
 const Loader:React.FC = () => {

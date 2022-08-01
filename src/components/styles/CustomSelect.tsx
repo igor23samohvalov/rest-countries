@@ -1,6 +1,19 @@
 import styled from 'styled-components';
 import Select from 'react-select';
 
+interface RegionInterface {
+  value: string;
+  label: string;
+}
+
+export const options:Array<RegionInterface> = [
+  { value: 'africa', label: 'Africa' },
+  { value: 'america', label: 'America' },
+  { value: 'asia', label: 'Asia' },
+  { value: 'europe', label: 'Europe' },
+  { value: 'oceania', label: 'Oceania' },
+];
+
 export const CustomSelect = styled(Select).attrs({
   styles: {
     control: (provided) => ({
