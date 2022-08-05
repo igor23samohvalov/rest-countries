@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { BsArrowLeft } from 'react-icons/bs';
+import styled from "styled-components";
+import { BsArrowLeft } from "react-icons/bs";
 
 export const StyledDiv = styled.div`
   grid-column: span 2;

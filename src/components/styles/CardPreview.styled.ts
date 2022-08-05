@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const CardContainer = styled(motion.div)`
   display: flex;
@@ -27,7 +27,6 @@ export const CardImage = styled.img`
 `;
 export const CardWrapper = styled.div`
   padding: 20px;
-
 `;
 export const CardTitle = styled.h3`
   margin-top: 10px;
@@ -43,5 +42,5 @@ export const CardInfo = styled.div`
 
   & > * {
     padding-bottom: 5px;
-  };
+  }
 `;

@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { Container } from '../components/styles/Container';
-import { routeCodes, routeSingle } from '../routing';
-import CardFull from '../components/CardFull';
-import NavigateBack from '../components/NavigateBack';
-import { ICardFull, ISingleCardFetch } from '../types/types';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import Container from "../components/styles/Container";
+import { routeCodes, routeSingle } from "../routing";
+import CardFull from "../components/CardFull";
+import NavigateBack from "../components/NavigateBack";
+import { ICardFull, ISingleCardFetch } from "../types/types";
 
 const defaultCard = {
-  capital: '',
-  currencies: '',
-  img: '',
+  capital: "",
+  currencies: "",
+  img: "",
   languages: [],
-  name: '',
-  nativeName: '',
+  name: "",
+  nativeName: "",
   population: Infinity,
-  subregion: '',
-  tld: '',
-  region: '',
+  subregion: "",
+  tld: "",
+  region: "",
 };
 
 const Wrapper = styled.div`
@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const DetailPage:React.FC = () => {
+function DetailPage() {
   const { name } = useParams<string>();
   const navigate = useNavigate();
 
@@ -42,11 +42,12 @@ const DetailPage:React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get<ISingleCardFetch[]>(routeSingle(name))
+    axios
+      .get<ISingleCardFetch[]>(routeSingle(name))
       .then((res) => {
         if (res.status === 404) {
-          throw new Error('Not Found');
-        } 
+          throw new Error("Not Found");
+        }
         return res.data;
       })
       .then(([data]) => {
@@ -63,14 +64,15 @@ const DetailPage:React.FC = () => {
           region: data.region,
         });
         if (data.borders.length > 0) {
-          axios.get(routeCodes(data.borders))
+          axios
+            .get(routeCodes(data.borders))
             .then((res) => res.data)
-            .then((data) => data.map(({ name }:any) => name.common))
-            .then((borders) => setBorders(borders))
+            .then((data) => data.map(({ name }: any) => name.common))
+            .then((borders) => setBorders(borders));
         }
         setLoading(false);
       })
-      .catch(() => navigate('/404'));
+      .catch(() => navigate("/404"));
   }, [name]);
 
   return (
@@ -96,6 +98,6 @@ const DetailPage:React.FC = () => {
       </Container>
     </main>
   );
-};
+}
 
 export default DetailPage;

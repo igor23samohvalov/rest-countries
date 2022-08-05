@@ -1,8 +1,11 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { StyledDiv, StyledButton, StyledArrow} from './styles/NavigateBack.styled';
+import { useNavigate } from "react-router-dom";
+import {
+  StyledDiv,
+  StyledButton,
+  StyledArrow,
+} from "./styles/NavigateBack.styled";
 
-const NavigateBack:React.FC = () => {
+function NavigateBack() {
   const navigate = useNavigate();
 
   return (
@@ -11,7 +14,7 @@ const NavigateBack:React.FC = () => {
         <StyledArrow /> Back
       </StyledButton>
     </StyledDiv>
-  )
+  );
 }
 
-export default NavigateBack
+export default NavigateBack;

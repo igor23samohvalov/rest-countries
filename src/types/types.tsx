@@ -1,10 +1,10 @@
 export interface ICardPreview {
   capital: string;
-  flags: { png: string};
+  flags: { png: string };
   name: { common: string; official: string };
   population: number;
   region: string;
-};
+}
 
 export interface ICardFull {
   capital: string;
@@ -15,11 +15,11 @@ export interface ICardFull {
   nativeName: any;
   population: number;
   subregion: string;
-  tld: string; 
+  tld: string;
   region: string;
   borders?: string[];
   loading?: boolean;
-};
+}
 
 export interface ISingleCardFetch {
   capital: string[];

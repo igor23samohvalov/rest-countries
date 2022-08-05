@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { FaSearch } from 'react-icons/fa';
+import styled from "styled-components";
+import { FaSearch } from "react-icons/fa";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ export const InputContainer = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     margin-bottom: 25px;
-  };
+  } ;
 `;
 export const StyledInput = styled.input`
   border: none;
@@ -31,7 +31,7 @@ export const StyledInput = styled.input`
     color: var(--font-color);
     font-family: var(--family);
     font-weight: var(--fw-normal);
-  };
+  }
 `;
 export const StyledIcon = styled(FaSearch)`
   position: absolute;

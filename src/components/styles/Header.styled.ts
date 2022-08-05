@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -23,7 +23,7 @@ export const ThemeSwitcher = styled.div`
 `;
 
 export const Title = styled.a.attrs({
-  href: '/',
+  href: "/",
 })`
   color: var(--font-color);
   text-decoration: none;

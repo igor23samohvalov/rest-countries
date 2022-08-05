@@ -1,26 +1,26 @@
-import { useEffect, useState } from 'react';
-import { CustomSelect, options } from './styles/CustomSelect';
+import { useEffect, useState } from "react";
+import { CustomSelect, options } from "./styles/CustomSelect";
 import {
   Wrapper,
   InputContainer,
   StyledInput,
   StyledIcon,
-} from './styles/Filters.styled';
+} from "./styles/Filters.styled";
 
 interface FiltersProps {
   filterCards: (country: string, region: string) => void;
-};
+}
 
-const Filters:React.FC<FiltersProps> = ({ filterCards }) => {
-  const [country, setCountry] = useState<string>('');
-  const [region, setRegion] = useState<string>('');
+function Filters({ filterCards }: FiltersProps) {
+  const [country, setCountry] = useState<string>("");
+  const [region, setRegion] = useState<string>("");
 
-  const handleInput:React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setCountry(e.target.value)
+  const handleInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setCountry(e.target.value);
   };
 
   useEffect(() => {
-    filterCards(country, region)
+    filterCards(country, region);
   }, [country, region]);
 
   return (
@@ -39,16 +39,16 @@ const Filters:React.FC<FiltersProps> = ({ filterCards }) => {
         placeholder="Filter by Region"
         isClearable
         isSearchable={false}
-        onChange={(region: any, _: any):void => {
+        onChange={(region: any): void => {
           if (!region) {
-            setRegion('')
+            setRegion("");
           } else {
-            setRegion(region.label)
+            setRegion(region.label);
           }
         }}
       />
     </Wrapper>
-  )
+  );
 }
 
-export default Filters
+export default Filters;

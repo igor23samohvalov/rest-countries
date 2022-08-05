@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const StyledImg = styled(motion.img)`
   display: block;
@@ -35,7 +35,7 @@ export const CardContent = styled.div`
     & > div {
       margin-bottom: 25px;
     }
-  } 
+  }
 `;
 export const CardAction = styled.div`
   display: flex;

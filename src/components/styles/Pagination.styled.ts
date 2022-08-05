@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export default styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,14 +13,17 @@ export const Wrapper = styled.div`
     cursor: pointer;
     font-size: 16px;
     border-radius: 50%;
+    border: none;
     padding: 7px;
+    background-color: var(--bg-color);
+    color: var(--font-color);
 
     &:hover {
       background-color: var(--font-color);
       color: var(--bg-color);
     }
   }
-  .active {    
+  .active {
     background-color: var(--font-color);
     font-weight: bold;
     color: var(--bg-color);

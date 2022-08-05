@@ -1,12 +1,11 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import {
   CardContainer,
   CardImage,
   CardWrapper,
   CardTitle,
   CardInfo,
-} from './styles/CardPreview.styled';
+} from "./styles/CardPreview.styled";
 
 interface CardPreviewProps {
   capital: string;
@@ -16,7 +15,13 @@ interface CardPreviewProps {
   region: string;
 }
 
-const CardPreview:React.FC<CardPreviewProps> = ({ capital, flag, name, population, region }) => {
+function CardPreview({
+  capital,
+  flag,
+  name,
+  population,
+  region,
+}: CardPreviewProps) {
   const navigate = useNavigate();
 
   return (
@@ -34,13 +39,22 @@ const CardPreview:React.FC<CardPreviewProps> = ({ capital, flag, name, populatio
       <CardWrapper>
         <CardTitle>{name}</CardTitle>
         <CardInfo>
-          <div><b>Population: </b><span>{population}</span></div>
-          <div><b>Region: </b><span>{region}</span></div>
-          <div><b>Capital: </b><span>{capital}</span></div>
+          <div>
+            <b>Population: </b>
+            <span>{population}</span>
+          </div>
+          <div>
+            <b>Region: </b>
+            <span>{region}</span>
+          </div>
+          <div>
+            <b>Capital: </b>
+            <span>{capital}</span>
+          </div>
         </CardInfo>
       </CardWrapper>
     </CardContainer>
   );
-};
+}
 
 export default CardPreview;
